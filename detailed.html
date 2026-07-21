@@ -31,14 +31,17 @@ h1{font-size:clamp(24px,3.4vw,33px);line-height:1.15;margin:.28em 0 .15em;letter
 .bar button:hover{border-color:var(--rob)}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
 .tblwrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:760px}
 thead th{position:sticky;top:0;text-align:left;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:700;padding:9px 12px;border-bottom:1px solid var(--border);background:var(--surface-2)}
 tbody td{padding:7px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
 tbody tr:last-child td{border-bottom:none}
 td.num{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
 .star{color:var(--amber)}
 tr.pri td{background:color-mix(in srgb,var(--amber) 7%,transparent)}
-td.own{color:var(--muted);white-space:nowrap;font-size:12px}
+td.asg,td.due{color:var(--muted);white-space:nowrap;font-size:12px}
+td.due{font-variant-numeric:tabular-nums}
+td.due.overdue{color:var(--p2);font-weight:700}
+.dash{color:var(--faint)}
 .note{font-size:11px;color:var(--faint);font-style:italic}
 .chip{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 9px;border-radius:99px;white-space:nowrap;display:inline-block}
 .st-assigned{color:var(--assigned);background:var(--assigned-bg)}.st-rob{color:var(--rob);background:var(--rob-bg)}.st-ap{color:var(--ap);background:var(--ap-bg)}.st-p1{color:var(--p1);background:var(--p1-bg)}.st-p2{color:var(--p2);background:var(--p2-bg)}.st-qcbd{color:var(--qcbd);background:var(--qcbd-bg)}.st-complete{color:var(--complete);background:var(--complete-bg);font-weight:800}
@@ -90,16 +93,22 @@ function render(objs){
   var pri = objs.filter(function(o){return o.priority;});
   var rest = objs.filter(function(o){return !o.priority;});
   var ordered = pri.concat(rest);
+  var today = new Date(new Date().toDateString());
   var html='<div class="card"><div class="tblwrap"><table>'+
-    '<thead><tr><th>Doc No.</th><th>Procedure</th><th>Owner</th><th>Status</th></tr></thead><tbody>';
+    '<thead><tr><th>Doc No.</th><th>Procedure</th><th>Assigned To</th><th>Due Date</th><th>Status</th></tr></thead><tbody>';
   ordered.forEach(function(o){
     var cls = LABELCLASS[o.status] || "assigned";
     var rowcls = [o.priority?"pri":"", cls==="obsdone"?"obsdone":""].filter(Boolean).join(" ");
     var star = o.priority ? '<span class="star" title="Priority">★</span> ' : '';
     var note = o.note ? ' <span class="note">'+esc(o.note)+'</span>' : '';
+    var overdue=false;
+    if(o.due && cls!=="complete" && cls!=="obsdone"){ var dt=new Date(o.due); if(!isNaN(dt.getTime()) && dt<today) overdue=true; }
+    var asgCell = o.assigned ? esc(o.assigned) : '<span class="dash">—</span>';
+    var dueCell = o.due ? esc(o.due) : '<span class="dash">—</span>';
     html += '<tr class="'+rowcls+'"><td class="num">'+star+esc(o.num)+'</td>'+
       '<td class="ttl">'+esc(o.title)+note+'</td>'+
-      '<td class="own">Robert Wilbanks</td>'+
+      '<td class="asg">'+asgCell+'</td>'+
+      '<td class="due'+(overdue?' overdue':'')+'">'+dueCell+'</td>'+
       '<td><span class="chip st-'+cls+'">'+esc(o.status||"Assigned")+'</span></td></tr>';
   });
   html += '</tbody></table></div></div>';
@@ -130,7 +139,8 @@ function load(){
     if(!rows.length){ banner("The spreadsheet is empty."); return; }
     var h = rows[0];
     var iNum=colIdx(h,"doc no"), iTitle=colIdx(h,"procedure"), iNote=colIdx(h,"note"),
-        iPri=colIdx(h,"priority"), iStat=colIdx(h,"status");
+        iPri=colIdx(h,"priority"), iStat=colIdx(h,"status"),
+        iAsg=colIdx(h,"assigned to"), iDue=colIdx(h,"due date");
     if(iNum<0||iTitle<0){ banner("Couldn't find the <code>Doc No</code> / <code>Procedure</code> columns. Don't rename the headers."); return; }
     var objs=[];
     for(var r=1;r<rows.length;r++){
@@ -141,6 +151,8 @@ function load(){
         num:num,
         title:(row[iTitle]||"").trim(),
         note:iNote>-1?(row[iNote]||"").trim():"",
+        assigned:iAsg>-1?(row[iAsg]||"").trim():"",
+        due:iDue>-1?(row[iDue]||"").trim():"",
         priority:iPri>-1?truthy(row[iPri]):false,
         status:iStat>-1?(row[iStat]||"").trim():"Assigned"
       });

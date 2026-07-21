@@ -1,0 +1,107 @@
+<title>Operations Procedures — Master Tracker</title>
+<style>
+:root{--bg:#eef1f5;--surface:#fff;--surface-2:#f7f9fb;--ink:#16202e;--muted:#5b6775;--faint:#8a95a4;--border:#e0e5ec;--navy:#152B47;--amber:#F0B429;
+--makor:#2f7d6b;--makor-bg:#e4f3ef;--revise:#4d6a99;--revise-bg:#e9eff7;--review:#b07d10;--review-bg:#fbf1d8;--obs:#8a95a4;--obs-bg:#eef0f3;--oos:#9a5b8f;--oos-bg:#f4eaf1;--tbd:#8a95a4;--tbd-bg:#f2f4f7;
+--shadow:0 1px 2px rgba(18,32,48,.06),0 4px 16px rgba(18,32,48,.05);--radius:14px;--sans:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif;}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1621;--surface:#16202e;--surface-2:#1b2735;--ink:#e8edf4;--muted:#9aa6b6;--faint:#6f7d8e;--border:#26313f;--navy:#0c1a2b;
+--makor:#5cc2ac;--makor-bg:#123029;--revise:#7fa3d8;--revise-bg:#152238;--review:#e2b24a;--review-bg:#332714;--obs:#7f8b9a;--obs-bg:#1c2430;--oos:#c78fbb;--oos-bg:#2c1d29;--tbd:#7f8b9a;--tbd-bg:#1a222e;
+--shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);}}
+:root[data-theme="light"]{--bg:#eef1f5;--surface:#fff;--surface-2:#f7f9fb;--ink:#16202e;--muted:#5b6775;--faint:#8a95a4;--border:#e0e5ec;--navy:#152B47;--makor:#2f7d6b;--makor-bg:#e4f3ef;--revise:#4d6a99;--revise-bg:#e9eff7;--review:#b07d10;--review-bg:#fbf1d8;--obs:#8a95a4;--obs-bg:#eef0f3;--oos:#9a5b8f;--oos-bg:#f4eaf1;--tbd:#8a95a4;--tbd-bg:#f2f4f7;}
+:root[data-theme="dark"]{--bg:#0e1621;--surface:#16202e;--surface-2:#1b2735;--ink:#e8edf4;--muted:#9aa6b6;--faint:#6f7d8e;--border:#26313f;--navy:#0c1a2b;--makor:#5cc2ac;--makor-bg:#123029;--revise:#7fa3d8;--revise-bg:#152238;--review:#e2b24a;--review-bg:#332714;--obs:#7f8b9a;--obs-bg:#1c2430;--oos:#c78fbb;--oos-bg:#2c1d29;--tbd:#7f8b9a;--tbd-bg:#1a222e;}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:32px 22px 64px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:700}
+h1{font-size:clamp(24px,3.4vw,33px);line-height:1.15;margin:.28em 0 .15em;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:15px;max-width:70ch}
+.rule{height:3px;background:var(--amber);border-radius:2px;width:64px;margin:18px 0 24px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px;margin:22px 0 12px}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px 15px;box-shadow:var(--shadow);border-top:3px solid var(--border)}
+.tile.makor{border-top-color:var(--makor)}.tile.revise{border-top-color:var(--revise)}.tile.review{border-top-color:var(--review)}.tile.obs{border-top-color:var(--obs)}.tile.oos{border-top-color:var(--oos)}.tile.tbd{border-top-color:var(--tbd)}
+.tile .n{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}
+.tile .l{font-size:11.5px;color:var(--muted);margin-top:2px}
+.tile.makor .n{color:var(--makor)}.tile.revise .n{color:var(--revise)}.tile.review .n{color:var(--review)}.tile.obs .n{color:var(--obs)}.tile.oos .n{color:var(--oos)}
+.legend{font-size:12px;color:var(--muted);margin:2px 0 22px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.tblwrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:620px}
+thead th{position:sticky;top:0;text-align:left;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:700;padding:9px 12px;border-bottom:1px solid var(--border);background:var(--surface-2)}
+tbody td{padding:7px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+td.own,td.rev{color:var(--muted);white-space:nowrap;font-size:12px}
+.note{font-size:11px;color:var(--faint);font-style:italic}
+.chip{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 8px;border-radius:99px;border:1px solid transparent;white-space:nowrap;display:inline-block}
+.chip.makor{color:var(--makor);background:var(--makor-bg);border-color:color-mix(in srgb,var(--makor) 40%,transparent)}
+.chip.revise{color:var(--revise);background:var(--revise-bg);border-color:color-mix(in srgb,var(--revise) 34%,transparent)}
+.chip.review{color:var(--review);background:var(--review-bg);border-color:color-mix(in srgb,var(--review) 36%,transparent)}
+.chip.obs{color:var(--obs);background:var(--obs-bg);border-color:color-mix(in srgb,var(--obs) 34%,transparent)}
+.chip.oos{color:var(--oos);background:var(--oos-bg);border-color:color-mix(in srgb,var(--oos) 34%,transparent)}
+.chip.tbd{color:var(--tbd);background:var(--tbd-bg);border:1px dashed color-mix(in srgb,var(--tbd) 45%,transparent)}
+tr.obs td.num,tr.obs td.ttl{text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--obs) 55%,transparent);color:var(--obs)}
+footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+<div class="wrap">
+<div class="eyebrow">AER Worldwide · Operations · Document Control</div>
+<h1>Operations Procedures — Master Tracker</h1>
+<div class="rule"></div>
+<p class="sub">All 45 operations procedures from the master list. Dispositions assigned by Rob are applied; the rest are marked <em>Awaiting</em>. This is our shared source of truth.</p>
+<div class="tiles">
+<div class="tile makor"><div class="n">4</div><div class="l">Revise · Makor</div></div>
+<div class="tile revise"><div class="n">2</div><div class="l">Revise</div></div>
+<div class="tile review"><div class="n">4</div><div class="l">Review</div></div>
+<div class="tile obs"><div class="n">6</div><div class="l">Obsolete</div></div>
+<div class="tile oos"><div class="n">1</div><div class="l">Out of scope</div></div>
+<div class="tile tbd"><div class="n">28</div><div class="l">Awaiting disposition</div></div>
+</div>
+<p class="legend">17 of 45 dispositioned · 28 awaiting your call.</p>
+<div class="card"><div class="tblwrap"><table>
+<thead><tr><th>Doc No.</th><th>Procedure</th><th>Owner</th><th>Rev</th><th>Disposition</th></tr></thead>
+<tbody>
+<tr class=""><td class="num">OPS-141</td><td class="ttl">Import Procedure (USA)</td><td class="own">Hogan</td><td class="rev">0.1</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">OPS-142</td><td class="ttl">Import Procedure (MY) <span class="note">Malaysia</span></td><td class="own">Pullaiyar</td><td class="rev">0.1</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">OPS-143</td><td class="ttl">Export Procedure (USA)</td><td class="own">Hogan</td><td class="rev">0.1</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">OPS-144</td><td class="ttl">Export Procedure (MY) <span class="note">Malaysia</span></td><td class="own">Pullaiyar</td><td class="rev">0.1</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">OPS-218</td><td class="ttl">Customer Pick Up Procedure</td><td class="own">Aguilar</td><td class="rev">0.1</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">OPS-800</td><td class="ttl">Dispatch Procedure</td><td class="own">Aguilar</td><td class="rev">1.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">OPS-803</td><td class="ttl">Commodity Inventory Control Procedure</td><td class="own">Wilbanks</td><td class="rev">0.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">OPS-804</td><td class="ttl">Rack Handling and Loading Procedure</td><td class="own">Torralba</td><td class="rev">0.1</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">OPS-806</td><td class="ttl">Ebin Procedure</td><td class="own">Teran</td><td class="rev">0.0</td><td><span class="chip makor">Revise · Makor</span></td></tr>
+<tr class=""><td class="num">REC-130</td><td class="ttl">Lockout Tagout Procedure <span class="note">no Makor</span></td><td class="own">VanCleave</td><td class="rev">1.0</td><td><span class="chip revise">Revise</span></td></tr>
+<tr class=""><td class="num">REC-131</td><td class="ttl">AER Security Control Procedure (TX/SC) <span class="note">no Makor</span></td><td class="own">Ortiz</td><td class="rev">2.0</td><td><span class="chip revise">Revise</span></td></tr>
+<tr class="obs"><td class="num">REC-134</td><td class="ttl">Servicing Air Filters Procedure <span class="note">done by contractors</span></td><td class="own">VanCleave</td><td class="rev">0.0</td><td><span class="chip obs">Obsolete</span></td></tr>
+<tr class=""><td class="num">REC-135</td><td class="ttl">AER Security Controls Procedure (CA) <span class="note">Canada — not Robert</span></td><td class="own">Alexander</td><td class="rev">0.0</td><td><span class="chip oos">Out of scope</span></td></tr>
+<tr class=""><td class="num">REC-137</td><td class="ttl">Forklift Procedure <span class="note">no Makor</span></td><td class="own">Torralba</td><td class="rev">1.0</td><td><span class="chip review">Review</span></td></tr>
+<tr class=""><td class="num">REC-138</td><td class="ttl">Weigh Master Procedure <span class="note">no Makor</span></td><td class="own">Alexander</td><td class="rev">1.0</td><td><span class="chip review">Review</span></td></tr>
+<tr class=""><td class="num">REC-139</td><td class="ttl">Material Stacking and Wrapping / Unwrapping Procedure</td><td class="own">Wilbanks</td><td class="rev">0.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">REC-200</td><td class="ttl">Receiving Procedure</td><td class="own">Wilbanks</td><td class="rev">3.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">REC-201</td><td class="ttl">Sorting Procedure</td><td class="own">Torralba</td><td class="rev">2.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">REC-202</td><td class="ttl">Tracked Recycling Procedure</td><td class="own">Wilbanks</td><td class="rev">2.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">REC-203</td><td class="ttl">Shredder Procedure</td><td class="own">Wilbanks</td><td class="rev">2.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">REC-204</td><td class="ttl">Hammer Mill Procedure</td><td class="own">Decker</td><td class="rev">1.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">REC-205</td><td class="ttl">Baler Procedure</td><td class="own">VanCleave</td><td class="rev">0.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class="obs"><td class="num">REC-209</td><td class="ttl">Air Compressor Procedure</td><td class="own">VanCleave</td><td class="rev">0.0</td><td><span class="chip obs">Obsolete</span></td></tr>
+<tr class=""><td class="num">REC-210</td><td class="ttl">Scale Procedure <span class="note">no Makor</span></td><td class="own">Pearson</td><td class="rev">1.0</td><td><span class="chip review">Review</span></td></tr>
+<tr class="obs"><td class="num">REC-211</td><td class="ttl">Air Gun Procedure</td><td class="own">Teran</td><td class="rev">0.0</td><td><span class="chip obs">Obsolete</span></td></tr>
+<tr class="obs"><td class="num">REC-213</td><td class="ttl">Dish Downstream Procedure</td><td class="own">Aguilar</td><td class="rev">0.0</td><td><span class="chip obs">Obsolete</span></td></tr>
+<tr class="obs"><td class="num">REC-221</td><td class="ttl">New Receipts Transfer and Consolidation Procedure</td><td class="own">Alexander</td><td class="rev">0.0</td><td><span class="chip obs">Obsolete</span></td></tr>
+<tr class=""><td class="num">REC-223</td><td class="ttl">Housekeeping Procedure</td><td class="own">Wilbanks</td><td class="rev">2.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">REC-224</td><td class="ttl">Intel (KM 1) Process Flow Procedure (MY) <span class="note">Malaysia</span></td><td class="own">Pullaiyar</td><td class="rev">0.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">REC-225</td><td class="ttl">Intel (PG 7 &amp; PG 8) Process Flow Procedure (MY) <span class="note">Malaysia</span></td><td class="own">Pullaiyar</td><td class="rev">0.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">REC-226</td><td class="ttl">Intel (PG 10) Process Flow Procedure (MY) <span class="note">Malaysia</span></td><td class="own">Pullaiyar</td><td class="rev">0.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">REC-227</td><td class="ttl">Glencore Intel Process Procedure</td><td class="own">Ross</td><td class="rev">0.0</td><td><span class="chip makor">Revise · Makor</span></td></tr>
+<tr class=""><td class="num">REC-228</td><td class="ttl">Data Capture Procedure <span class="note">subcon analog exists</span></td><td class="own">Wilbanks</td><td class="rev">0.0</td><td><span class="chip makor">Revise · Makor</span></td></tr>
+<tr class=""><td class="num">TE-300</td><td class="ttl">RMA Procedure</td><td class="own">Ortiz</td><td class="rev">2.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">TE-304</td><td class="ttl">Shipping Procedure</td><td class="own">Ortiz</td><td class="rev">2.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">TE-311</td><td class="ttl">Hardware and Components Facility to Facility Transfer Procedure</td><td class="own">Torralba</td><td class="rev">0.0</td><td><span class="chip makor">Revise · Makor</span></td></tr>
+<tr class="obs"><td class="num">TE-322</td><td class="ttl">9999 Material Transfer Button Procedure</td><td class="own">Torralba</td><td class="rev">0.0</td><td><span class="chip obs">Obsolete</span></td></tr>
+<tr class=""><td class="num">TE-400</td><td class="ttl">Hardware Testing Procedure</td><td class="own">Ortiz</td><td class="rev">5.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">TE-403</td><td class="ttl">Onsite Services Procedure</td><td class="own">Ortiz</td><td class="rev">3.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">TE-404</td><td class="ttl">Component Testing Procedure</td><td class="own">Ortiz</td><td class="rev">2.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">TE-405</td><td class="ttl">Itron RMA Procedure</td><td class="own">Wilbanks</td><td class="rev">1.0</td><td><span class="chip review">Review</span></td></tr>
+<tr class=""><td class="num">TE-406</td><td class="ttl">Data Sanitization Plan</td><td class="own">Wilbanks</td><td class="rev">3.1</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">TE-407</td><td class="ttl">R2 Reuse Plan</td><td class="own">Torralba</td><td class="rev">1.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">TE-408</td><td class="ttl">Asset Recovery Program Procedure</td><td class="own">Ortiz</td><td class="rev">2.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+<tr class=""><td class="num">TE-409</td><td class="ttl">Inventory Control Procedure</td><td class="own">Wilbanks</td><td class="rev">0.0</td><td><span class="chip tbd">Awaiting</span></td></tr>
+</tbody></table></div></div>
+<footer><span>Status as of July 20, 2026 · source: Master List Procedures 07.20.2026</span><span>AER Worldwide — proprietary &amp; confidential</span></footer>
+</div>

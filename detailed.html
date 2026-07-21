@@ -60,7 +60,7 @@ footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--border);font-
 <footer><span>Detailed review-pipeline view · live from Google Sheet</span><span>AER Worldwide — proprietary &amp; confidential</span></footer>
 </div>
 <script>
-var SHEET_CSV_URL = "PASTE_GOOGLE_SHEET_CSV_URL_HERE";
+var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTZN7qMpFEjCCD5HydKb7DKQBLFq9e5Th0HWDIzhD7gv9k6xQFzlfY1F9C9LhHpWLNH6OvBC2Y7qde-/pub?output=csv";
 var LABELCLASS = {"Assigned": "assigned", "Rob Review": "rob", "Andrew Paola Review": "ap", "P1 Rework": "p1", "P2 Rework": "p2", "Waiting for QCBD Approval": "qcbd", "Complete": "complete", "Obsolete Pending": "obspend", "Obsoleted": "obsdone"};
 
 function csvParse(text){
@@ -151,9 +151,9 @@ function load(){
   })
   .catch(function(e){
     st.textContent="";
-    banner('<b>Could not load the spreadsheet.</b> '+
-      'If you are viewing this as a claude.ai artifact, live data is blocked here — open the GitHub Pages link instead. '+
-      'Otherwise check that the sheet is still published to the web. ('+esc(String(e))+')');
+    banner('<b>Live data can\'t load here.</b> This is the live team dashboard — open it on GitHub Pages: '+
+      '<a href="https://rwilbanks251-ctrl.github.io/aer-procedures-tracker/detailed.html">rwilbanks251-ctrl.github.io/aer-procedures-tracker/detailed.html</a>. '+
+      '(The claude.ai artifact copy is blocked from fetching Google Sheets. If you ARE on GitHub Pages and see this, check the sheet is still published to the web. '+esc(String(e))+')');
   });
 }
 

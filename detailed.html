@@ -25,7 +25,7 @@ h1{font-size:clamp(24px,3.4vw,33px);line-height:1.15;margin:.28em 0 .15em;letter
 .rework{font-size:12.5px;color:var(--muted);margin:0 2px 18px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .rework b{font-weight:700;color:var(--ink)}
 .mini{font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:99px}
-.mini.assigned{color:var(--assigned);background:var(--assigned-bg)}.mini.p1{color:var(--p1);background:var(--p1-bg)}.mini.p2{color:var(--p2);background:var(--p2-bg)}.mini.obspend{color:var(--obspend);background:var(--obspend-bg)}.mini.obsappr{color:var(--obsappr);background:var(--obsappr-bg)}.mini.obsdone{color:var(--obsdone);background:var(--obsdone-bg)}
+.mini.assigned{color:var(--assigned);background:var(--assigned-bg)}.mini.complete{color:var(--complete);background:var(--complete-bg)}.mini.p1{color:var(--p1);background:var(--p1-bg)}.mini.p2{color:var(--p2);background:var(--p2-bg)}.mini.obspend{color:var(--obspend);background:var(--obspend-bg)}.mini.obsappr{color:var(--obsappr);background:var(--obsappr-bg)}.mini.obsdone{color:var(--obsdone);background:var(--obsdone-bg)}
 .bar{display:flex;align-items:center;gap:12px;margin:0 2px 12px;font-size:12px;color:var(--faint)}
 .bar button{font:inherit;font-weight:700;color:var(--rob);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 12px;cursor:pointer}
 .bar button:hover{border-color:var(--rob)}
@@ -58,14 +58,14 @@ footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--border);font-
 <div class="rule"></div>
 <p class="sub">Where each procedure sits in the review pipeline. Live from the team spreadsheet — a procedure moves left to right; a failed review is kicked back for rework and re-enters the loop.</p>
 <div class="flow"><div class="fnode f-assigned">Assigned</div><div class="farrow">→</div><div class="fnode f-rob">Rob Review</div><div class="farrow">→</div><div class="fnode f-ap">Andrew Paola Review</div><div class="farrow">→</div><div class="fnode f-qcbd">QCBD Approval</div><div class="farrow">→</div><div class="fnode f-complete">Complete</div></div>
-<p class="rework"><span class="star">★</span> <b>Priority</b> (floated to top) &nbsp;·&nbsp; Rework: <span class="mini p1">P1 Rework</span> back from Rob Review &nbsp;·&nbsp; <span class="mini p2">P2 Rework</span> back from Andrew &amp; Paola &nbsp;·&nbsp; Obsolete path: <span class="mini assigned">Assigned</span> → <span class="mini obsappr">Obsoletion Approval</span> → <span class="mini obsdone">Obsoleted</span></p>
+<p class="rework"><span class="star">★</span> <b>Priority</b> (floated to top) &nbsp;·&nbsp; Rework: <span class="mini p1">P1 Rework</span> back from Rob Review &nbsp;·&nbsp; <span class="mini p2">P2 Rework</span> back from Andrew &amp; Paola &nbsp;·&nbsp; Obsolete path: <span class="mini obsappr">Obsoletion Approval</span> → <span class="mini complete">Complete</span></p>
 <div class="bar"><button id="refresh" type="button">Refresh now</button><span id="status">Loading…</span></div>
 <div id="mount"></div>
 <footer><span>Detailed review-pipeline view · live from Google Sheet</span><span>AER Worldwide — proprietary &amp; confidential</span></footer>
 </div>
 <script>
 var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTZN7qMpFEjCCD5HydKb7DKQBLFq9e5Th0HWDIzhD7gv9k6xQFzlfY1F9C9LhHpWLNH6OvBC2Y7qde-/pub?output=csv";
-var LABELCLASS = {"Assigned": "assigned", "Rob Review": "rob", "Andrew Paola Review": "ap", "P1 Rework": "p1", "P2 Rework": "p2", "Waiting for QCBD Approval": "qcbd", "Complete": "complete", "Obsoletion Approval": "obsappr", "Obsoleted": "obsdone"};
+var LABELCLASS = {"Assigned": "assigned", "Rob Review": "rob", "Andrew Paola Review": "ap", "P1 Rework": "p1", "P2 Rework": "p2", "Waiting for QCBD Approval": "qcbd", "Complete": "complete", "Obsoletion Approval": "obsappr"};
 var DISPCLASS = {"Obsolete": "obsolete", "Revise": "revise"};
 
 function csvParse(text){

@@ -58,14 +58,14 @@ footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--border);font-
 <div class="rule"></div>
 <p class="sub">Where each procedure sits in the review pipeline. Live from the team spreadsheet — a procedure moves left to right; a failed review is kicked back for rework and re-enters the loop.</p>
 <div class="flow"><div class="fnode f-assigned">Assigned</div><div class="farrow">→</div><div class="fnode f-rob">Rob Review</div><div class="farrow">→</div><div class="fnode f-ap">Andrew Paola Review</div><div class="farrow">→</div><div class="fnode f-qcbd">QCBD Approval</div><div class="farrow">→</div><div class="fnode f-complete">Complete</div></div>
-<p class="rework"><span class="star">★</span> <b>Priority</b> (floated to top) &nbsp;·&nbsp; Rework: <span class="mini p1">P1 Rework</span> back from Rob Review &nbsp;·&nbsp; <span class="mini p2">P2 Rework</span> back from Andrew &amp; Paola &nbsp;·&nbsp; Obsolete path: <span class="mini obsappr">Obsoletion Approval</span> → <span class="mini complete">Complete</span></p>
+<p class="rework"><span class="star">★</span> <b>Priority</b> (floated to top) &nbsp;·&nbsp; Rework: <span class="mini p1">P1 Rework</span> back from Rob Review &nbsp;·&nbsp; <span class="mini p2">P2 Rework</span> back from Andrew &amp; Paola &nbsp;·&nbsp; Obsolete path: <span class="mini obsappr">Obsolescence Approval</span> → <span class="mini complete">Complete</span></p>
 <div class="bar"><button id="refresh" type="button">Refresh now</button><span id="status">Loading…</span></div>
 <div id="mount"></div>
 <footer><span>Detailed review-pipeline view · live from Google Sheet</span><span>AER Worldwide — proprietary &amp; confidential</span></footer>
 </div>
 <script>
 var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTZN7qMpFEjCCD5HydKb7DKQBLFq9e5Th0HWDIzhD7gv9k6xQFzlfY1F9C9LhHpWLNH6OvBC2Y7qde-/pub?output=csv";
-var LABELCLASS = {"Assigned": "assigned", "Rob Review": "rob", "Andrew Paola Review": "ap", "P1 Rework": "p1", "P2 Rework": "p2", "Waiting for QCBD Approval": "qcbd", "Complete": "complete", "Obsoletion Approval": "obsappr"};
+var LABELCLASS = {"Assigned": "assigned", "Rob Review": "rob", "Andrew Paola Review": "ap", "P1 Rework": "p1", "P2 Rework": "p2", "Waiting for QCBD Approval": "qcbd", "Complete": "complete", "Obsolescence Approval": "obsappr"};
 var DISPCLASS = {"Obsolete": "obsolete", "Revise": "revise"};
 
 function csvParse(text){

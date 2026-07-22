@@ -36,14 +36,15 @@ h1{font-size:clamp(24px,3.4vw,33px);line-height:1.15;margin:.28em 0 .15em;letter
 .bar button:hover{border-color:var(--rob)}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
 .tblwrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13px;min-width:880px}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:980px}
 thead th{position:sticky;top:0;text-align:left;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:700;padding:9px 12px;border-bottom:1px solid var(--border);background:var(--surface-2)}
 tbody td{padding:7px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
 tbody tr:last-child td{border-bottom:none}
 td.num{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
 .star{color:var(--amber)}
 tr.pri td{background:color-mix(in srgb,var(--amber) 7%,transparent)}
-td.asg,td.due{color:var(--muted);white-space:nowrap;font-size:12px}
+td.asg,td.due,td.upd{color:var(--muted);white-space:nowrap;font-size:12px}
+td.upd{font-variant-numeric:tabular-nums}
 td.due{font-variant-numeric:tabular-nums}
 td.due.overdue{color:var(--p2);font-weight:700}
 .dash{color:var(--faint)}
@@ -101,7 +102,7 @@ function render(objs){
   var ordered = pri.concat(rest);
   var today = new Date(new Date().toDateString());
   var html='<div class="card"><div class="tblwrap"><table>'+
-    '<thead><tr><th>Doc No.</th><th>Procedure</th><th>Requested Disposition</th><th>Assigned To</th><th>Due Date</th><th>Status</th></tr></thead><tbody>';
+    '<thead><tr><th>Doc No.</th><th>Procedure</th><th>Requested Disposition</th><th>Assigned To</th><th>Due Date</th><th>Status</th><th>Last Updated</th></tr></thead><tbody>';
   ordered.forEach(function(o){
     var cls = LABELCLASS[o.status] || "assigned";
     var rowcls = [o.priority?"pri":"", cls==="obsdone"?"obsdone":""].filter(Boolean).join(" ");
@@ -118,7 +119,8 @@ function render(objs){
       '<td>'+dispCell+'</td>'+
       '<td class="asg">'+asgCell+'</td>'+
       '<td class="due'+(overdue?' overdue':'')+'">'+dueCell+'</td>'+
-      '<td><span class="chip st-'+cls+'">'+esc(o.status||"Assigned")+'</span></td></tr>';
+      '<td><span class="chip st-'+cls+'">'+esc(o.status||"Assigned")+'</span></td>'+
+      '<td class="upd">'+(o.updated?esc(o.updated):'<span class="dash">—</span>')+'</td></tr>';
   });
   html += '</tbody></table></div></div>';
   document.getElementById("mount").innerHTML = html;
@@ -149,7 +151,7 @@ function load(){
     var h = rows[0];
     var iNum=colIdx(h,"doc no"), iTitle=colIdx(h,"procedure"), iNote=colIdx(h,"note"),
         iPri=colIdx(h,"priority"), iStat=colIdx(h,"status"),
-        iAsg=colIdx(h,"assigned to"), iDue=colIdx(h,"due date"), iDisp=colIdx(h,"requested disposition");
+        iAsg=colIdx(h,"assigned to"), iDue=colIdx(h,"due date"), iDisp=colIdx(h,"requested disposition"), iUpd=colIdx(h,"last updated");
     if(iNum<0||iTitle<0){ banner("Couldn't find the <code>Doc No</code> / <code>Procedure</code> columns. Don't rename the headers."); return; }
     var objs=[];
     for(var r=1;r<rows.length;r++){
@@ -163,6 +165,7 @@ function load(){
         disp:iDisp>-1?(row[iDisp]||"").trim():"",
         assigned:iAsg>-1?(row[iAsg]||"").trim():"",
         due:iDue>-1?(row[iDue]||"").trim():"",
+        updated:iUpd>-1?(row[iUpd]||"").trim():"",
         priority:iPri>-1?truthy(row[iPri]):false,
         status:iStat>-1?(row[iStat]||"").trim():"Assigned"
       });

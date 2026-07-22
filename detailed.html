@@ -34,6 +34,19 @@ h1{font-size:clamp(24px,3.4vw,33px);line-height:1.15;margin:.28em 0 .15em;letter
 .bar{display:flex;align-items:center;gap:12px;margin:0 2px 12px;font-size:12px;color:var(--faint)}
 .bar button{font:inherit;font-weight:700;color:var(--rob);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 12px;cursor:pointer}
 .bar button:hover{border-color:var(--rob)}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;margin:0 2px 12px}
+.tile{border:1px solid var(--border);border-top-width:3px;border-radius:10px;padding:6px 12px;cursor:pointer;background:var(--surface);text-align:left;font:inherit;line-height:1.15;min-width:88px}
+.tile:hover{border-color:var(--faint)}
+.tile.active{box-shadow:0 0 0 2px var(--ink)}
+.tile .tn{display:block;font-size:18px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink)}
+.tile .tl{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-top:1px;max-width:130px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 2px 12px}
+.filters input,.filters select{font:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--ink)}
+.filters input{min-width:190px}
+.filters .fbtn{font-size:12px;font-weight:700;color:var(--rob);background:none;border:1px solid var(--border);border-radius:99px;padding:5px 12px;cursor:pointer}
+.filters #count{font-size:12px;color:var(--faint);margin-left:auto}
+th.sortable{cursor:pointer;user-select:none}
+th.sortable:hover{color:var(--ink)}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
 .tblwrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px;min-width:980px}
@@ -64,6 +77,15 @@ footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--border);font-
 <div class="rule"></div>
 <div class="flowwrap"><div class="flowcard"><div class="flowscroll"><svg viewBox="0 0 1080 252" style="width:100%;height:auto"><defs><marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--faint)"/></marker></defs><rect x="20" y="128" width="150" height="46" rx="8" style="fill:var(--assigned-bg);stroke:var(--assigned)" stroke-width="1.5"/><text x="95" y="155" text-anchor="middle" style="fill:var(--assigned);font-weight:700;font-size:11px;font-family:var(--sans)">Assigned</text><rect x="250" y="58" width="170" height="46" rx="8" style="fill:var(--rob-bg);stroke:var(--rob)" stroke-width="1.5"/><text x="335" y="85" text-anchor="middle" style="fill:var(--rob);font-weight:700;font-size:11px;font-family:var(--sans)">Rob Review</text><rect x="470" y="58" width="190" height="46" rx="8" style="fill:var(--ap-bg);stroke:var(--ap)" stroke-width="1.5"/><text x="565" y="85" text-anchor="middle" style="fill:var(--ap);font-weight:700;font-size:11px;font-family:var(--sans)">Andrew Paola Review</text><rect x="250" y="198" width="220" height="46" rx="8" style="fill:var(--obsappr-bg);stroke:var(--obsappr)" stroke-width="1.5"/><text x="360" y="225" text-anchor="middle" style="fill:var(--obsappr);font-weight:700;font-size:11px;font-family:var(--sans)">Obsolescence Approval</text><rect x="720" y="128" width="180" height="46" rx="8" style="fill:var(--qcbd-bg);stroke:var(--qcbd)" stroke-width="1.5"/><text x="810" y="155" text-anchor="middle" style="fill:var(--qcbd);font-weight:700;font-size:11px;font-family:var(--sans)">QCBD Approval</text><rect x="940" y="128" width="120" height="46" rx="8" style="fill:var(--complete-bg);stroke:var(--complete)" stroke-width="1.5"/><text x="1000" y="155" text-anchor="middle" style="fill:var(--complete);font-weight:700;font-size:11px;font-family:var(--sans)">Complete</text><path d="M170 151 C 222 151 208 81 250 81" fill="none" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ah)"/><path d="M170 151 C 222 151 208 221 250 221" fill="none" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ah)"/><text x="205" y="100" text-anchor="middle" style="fill:var(--revise);font-size:10px;font-weight:700;font-family:var(--sans)">Revise</text><text x="205" y="200" text-anchor="middle" style="fill:var(--obspend);font-size:10px;font-weight:700;font-family:var(--sans)">Obsolete</text><line x1="420" y1="81" x2="470" y2="81" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ah)"/><path d="M660 81 C 705 81 686 140 720 140" fill="none" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ah)"/><path d="M470 221 C 620 221 686 162 720 162" fill="none" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ah)"/><line x1="900" y1="151" x2="940" y2="151" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ah)"/><path d="M319 58 C 319 14 351 14 351 58" fill="none" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ah)" stroke-dasharray="5 3"/><path d="M565 58 C 555 6 379 6 375 58" fill="none" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ah)" stroke-dasharray="5 3"/><text x="271" y="34" text-anchor="middle" style="fill:var(--assigned);font-size:9px;font-weight:700;font-family:var(--sans)">P1 Rework</text><text x="480" y="40" text-anchor="middle" style="fill:var(--assigned);font-size:9px;font-weight:700;font-family:var(--sans)">P2 Rework</text></svg></div></div></div><p class="rework2"><span class="star">★</span> <b>Priority</b> floats to the top of the list.</p>
 <div class="bar"><button id="refresh" type="button">Refresh now</button><span id="status">Loading…</span></div>
+<div id="tiles" class="tiles"></div>
+<div class="filters">
+<input id="q" type="text" placeholder="Search doc # or name" aria-label="Search">
+<select id="fdisp" aria-label="Disposition"><option value="">All dispositions</option><option>Revise</option><option>Obsolete</option></select>
+<select id="fasg" aria-label="Assignee"><option value="">All assignees</option></select>
+<select id="fpri" aria-label="Priority"><option value="">Priority: all</option><option value="yes">★ Priority only</option><option value="no">Non-priority</option></select>
+<button id="clear" class="fbtn" type="button">Clear</button>
+<span id="count"></span>
+</div>
 <div id="mount"></div>
 <footer><span>Detailed review-pipeline view · live from Google Sheet</span><span>AER Worldwide — proprietary &amp; confidential</span></footer>
 </div>
@@ -95,25 +117,65 @@ function csvParse(text){
 function truthy(v){ v=(v||"").trim().toLowerCase(); return v==="yes"||v==="y"||v==="true"||v==="1"||v==="x"||v==="★"; }
 function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
-function render(objs){
-  var pri = objs.filter(function(o){return o.priority;});
-  var rest = objs.filter(function(o){return !o.priority;});
-  var ordered = pri.concat(rest);
-  var today = new Date(new Date().toDateString());
-  var html='<div class="card"><div class="tblwrap"><table>'+
-    '<thead><tr><th>Doc No.</th><th>Procedure</th><th>Requested Disposition</th><th>Assigned To</th><th>Due Date</th><th>Status</th><th>Last Updated</th></tr></thead><tbody>';
-  ordered.forEach(function(o){
-    var cls = LABELCLASS[o.status] || "assigned";
-    var rowcls = [o.priority?"pri":"", cls==="obsdone"?"obsdone":""].filter(Boolean).join(" ");
-    var star = o.priority ? '<span class="star" title="Priority">★</span> ' : '';
-    var note = o.note ? ' <span class="note">'+esc(o.note)+'</span>' : '';
+var ALL=[];
+var FILTERS={q:"",disp:"",asg:"",pri:"",stat:""};
+var SORT={col:null,dir:1};
+var STATUS_ORDER=["Assigned","Rob Review","Andrew Paola Review","P1 Rework","P2 Rework","Obsolescence Approval","Waiting for QCBD Approval","Complete"];
+
+function classFor(s){ return LABELCLASS[s] || "assigned"; }
+
+function drawTiles(){
+  var counts={}; ALL.forEach(function(o){ counts[o.status]=(counts[o.status]||0)+1; });
+  var seq=STATUS_ORDER.slice();
+  Object.keys(counts).forEach(function(s){ if(seq.indexOf(s)<0) seq.push(s); });
+  var h='<button class="tile'+(FILTERS.stat===""?" active":"")+'" data-stat="" style="border-top-color:var(--amber)"><span class="tn">'+ALL.length+'</span><span class="tl">All</span></button>';
+  seq.forEach(function(s){
+    var cls=classFor(s), c=counts[s]||0;
+    h+='<button class="tile'+(FILTERS.stat===s?" active":"")+'" data-stat="'+esc(s)+'" style="border-top-color:var(--'+cls+')"><span class="tn" style="color:var(--'+cls+')">'+c+'</span><span class="tl">'+esc(s)+'</span></button>';
+  });
+  document.getElementById("tiles").innerHTML=h;
+}
+
+function applyFilters(){
+  var q=FILTERS.q.toLowerCase();
+  return ALL.filter(function(o){
+    if(FILTERS.stat && o.status!==FILTERS.stat) return false;
+    if(FILTERS.disp && o.disp!==FILTERS.disp) return false;
+    if(FILTERS.asg && o.assigned.toLowerCase().indexOf(FILTERS.asg.toLowerCase())<0) return false;
+    if(FILTERS.pri==="yes" && !o.priority) return false;
+    if(FILTERS.pri==="no" && o.priority) return false;
+    if(q && (o.num+" "+o.title).toLowerCase().indexOf(q)<0) return false;
+    return true;
+  });
+}
+
+function sortList(list){
+  var l=list.slice();
+  if(!SORT.col){ l.sort(function(a,b){ if(a.priority!==b.priority) return a.priority?-1:1; return a._i-b._i; }); return l; }
+  var k=SORT.col, d=SORT.dir;
+  l.sort(function(a,b){ var av=(a[k]||"").toString().toLowerCase(), bv=(b[k]||"").toString().toLowerCase(); if(av<bv)return -d; if(av>bv)return d; return a._i-b._i; });
+  return l;
+}
+
+function draw(){
+  drawTiles();
+  var list=sortList(applyFilters());
+  var today=new Date(new Date().toDateString());
+  var cols=[["num","Doc No."],["title","Procedure"],["disp","Requested Disposition"],["assigned","Assigned To"],["due","Due Date"],["status","Status"],["updated","Last Updated"]];
+  var thead='<tr>'+cols.map(function(c){ var ar=SORT.col===c[0]?(SORT.dir>0?' \u25B2':' \u25BC'):''; return '<th class="sortable" data-k="'+c[0]+'">'+c[1]+ar+'</th>'; }).join('')+'</tr>';
+  var body='';
+  list.forEach(function(o){
+    var cls=classFor(o.status);
+    var rowcls=[o.priority?"pri":"", cls==="obsdone"?"obsdone":""].filter(Boolean).join(" ");
+    var star=o.priority?'<span class="star" title="Priority">★</span> ':'';
+    var note=o.note?' <span class="note">'+esc(o.note)+'</span>':'';
     var overdue=false;
     if(o.due && cls!=="complete" && cls!=="obsdone"){ var dt=new Date(o.due); if(!isNaN(dt.getTime()) && dt<today) overdue=true; }
-    var dcls = DISPCLASS[o.disp] || "";
-    var dispCell = o.disp ? (dcls ? '<span class="chip disp-'+dcls+'">'+esc(o.disp)+'</span>' : esc(o.disp)) : '<span class="dash">—</span>';
-    var asgCell = o.assigned ? esc(o.assigned) : '<span class="dash">—</span>';
-    var dueCell = o.due ? esc(o.due) : '<span class="dash">—</span>';
-    html += '<tr class="'+rowcls+'"><td class="num">'+star+esc(o.num)+'</td>'+
+    var dcls=DISPCLASS[o.disp]||"";
+    var dispCell=o.disp?(dcls?'<span class="chip disp-'+dcls+'">'+esc(o.disp)+'</span>':esc(o.disp)):'<span class="dash">—</span>';
+    var asgCell=o.assigned?esc(o.assigned):'<span class="dash">—</span>';
+    var dueCell=o.due?esc(o.due):'<span class="dash">—</span>';
+    body+='<tr class="'+rowcls+'"><td class="num">'+star+esc(o.num)+'</td>'+
       '<td class="ttl">'+esc(o.title)+note+'</td>'+
       '<td>'+dispCell+'</td>'+
       '<td class="asg">'+asgCell+'</td>'+
@@ -121,8 +183,9 @@ function render(objs){
       '<td><span class="chip st-'+cls+'">'+esc(o.status||"Assigned")+'</span></td>'+
       '<td class="upd">'+(o.updated?esc(o.updated):'<span class="dash">—</span>')+'</td></tr>';
   });
-  html += '</tbody></table></div></div>';
-  document.getElementById("mount").innerHTML = html;
+  document.getElementById("mount").innerHTML='<div class="card"><div class="tblwrap"><table><thead>'+thead+'</thead><tbody>'+body+'</tbody></table></div></div>';
+  document.querySelectorAll('#mount th.sortable').forEach(function(th){ th.addEventListener('click',function(){ var k=th.getAttribute('data-k'); if(SORT.col===k) SORT.dir=-SORT.dir; else{SORT.col=k;SORT.dir=1;} draw(); }); });
+  var cn=document.getElementById("count"); if(cn) cn.textContent=list.length+" of "+ALL.length;
 }
 
 function banner(msg){ document.getElementById("mount").innerHTML='<div class="banner">'+msg+'</div>'; }
@@ -158,6 +221,7 @@ function load(){
       var num=(row[iNum]||"").trim();
       if(!num) continue;
       objs.push({
+        _i:objs.length,
         num:num,
         title:(row[iTitle]||"").trim(),
         note:iNote>-1?(row[iNote]||"").trim():"",
@@ -169,7 +233,11 @@ function load(){
         status:iStat>-1?(row[iStat]||"").trim():"Assigned"
       });
     }
-    render(objs);
+    ALL=objs;
+    var nm={}; ALL.forEach(function(o){ o.assigned.split(",").forEach(function(n){ n=n.trim(); if(n) nm[n]=1; }); });
+    var sel=document.getElementById("fasg"), cur=FILTERS.asg;
+    sel.innerHTML='<option value="">All assignees</option>'+Object.keys(nm).sort().map(function(n){return '<option'+(n===cur?" selected":"")+'>'+esc(n)+'</option>';}).join('');
+    draw();
     var t=new Date();
     st.textContent="Updated "+t.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})+" · "+objs.length+" procedures";
   })
@@ -181,6 +249,12 @@ function load(){
   });
 }
 
+document.getElementById("q").addEventListener("input",function(e){FILTERS.q=e.target.value;draw();});
+document.getElementById("fdisp").addEventListener("change",function(e){FILTERS.disp=e.target.value;draw();});
+document.getElementById("fasg").addEventListener("change",function(e){FILTERS.asg=e.target.value;draw();});
+document.getElementById("fpri").addEventListener("change",function(e){FILTERS.pri=e.target.value;draw();});
+document.getElementById("clear").addEventListener("click",function(){FILTERS={q:"",disp:"",asg:"",pri:"",stat:""};SORT={col:null,dir:1};document.getElementById("q").value="";document.getElementById("fdisp").value="";document.getElementById("fasg").value="";document.getElementById("fpri").value="";draw();});
+document.getElementById("tiles").addEventListener("click",function(e){var t=e.target.closest?e.target.closest(".tile"):null; if(!t)return; var s=t.getAttribute("data-stat"); FILTERS.stat=(FILTERS.stat===s)?"":s; draw();});
 document.getElementById("refresh").addEventListener("click", load);
 load();
 setInterval(load, 60000);

@@ -1,0 +1,91 @@
+<title>EHS Intake Checklist — Procedures Ready for Review</title>
+<style>
+:root{
+  --bg:#eef1f5; --surface:#fff; --surface-2:#f7f9fb; --ink:#16202e; --muted:#5b6775; --faint:#8a95a4;
+  --border:#e0e5ec; --navy:#152B47; --amber:#F0B429; --revise:#4d6a99; --revise-bg:#e9eff7;
+  --obs:#a32d2d; --obs-bg:#fcebeb; --warn:#a15c00; --warn-bg:#fbeedd;
+  --shadow:0 1px 2px rgba(18,32,48,.06),0 4px 16px rgba(18,32,48,.05); --radius:14px;
+  --sans:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0e1621; --surface:#16202e; --surface-2:#1b2735; --ink:#e8edf4; --muted:#9aa6b6; --faint:#6f7d8e;
+    --border:#26313f; --navy:#0c1a2b; --revise:#7fa3d8; --revise-bg:#152238; --obs:#e0685c; --obs-bg:#3a1f1c;
+    --warn:#f0a94e; --warn-bg:#3a2a12; --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25); }
+}
+:root[data-theme="light"]{ --bg:#eef1f5; --surface:#fff; --surface-2:#f7f9fb; --ink:#16202e; --muted:#5b6775; --faint:#8a95a4; --border:#e0e5ec; --navy:#152B47; --revise:#4d6a99; --revise-bg:#e9eff7; --obs:#a32d2d; --obs-bg:#fcebeb; --warn:#a15c00; --warn-bg:#fbeedd; }
+:root[data-theme="dark"]{ --bg:#0e1621; --surface:#16202e; --surface-2:#1b2735; --ink:#e8edf4; --muted:#9aa6b6; --faint:#6f7d8e; --border:#26313f; --navy:#0c1a2b; --revise:#7fa3d8; --revise-bg:#152238; --obs:#e0685c; --obs-bg:#3a1f1c; --warn:#f0a94e; --warn-bg:#3a2a12; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:840px;margin:0 auto;padding:32px 22px 64px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:700}
+h1{font-size:clamp(22px,3.2vw,30px);line-height:1.2;margin:.3em 0 .15em;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:14.5px;max-width:70ch;margin:0 0 6px}
+.rule{height:3px;background:var(--amber);border-radius:2px;width:64px;margin:16px 0 24px}
+h2.section{font-size:14px;text-transform:uppercase;letter-spacing:.05em;margin:26px 0 10px;display:flex;align-items:center;gap:8px}
+.badge{font-size:11px;font-weight:700;padding:2px 9px;border-radius:99px}
+.badge.revise{color:var(--revise);background:var(--revise-bg)}
+.badge.obs{color:var(--obs);background:var(--obs-bg)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.tblwrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{text-align:left;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:700;padding:9px 12px;border-bottom:1px solid var(--border);background:var(--surface-2)}
+tbody td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+td.due{font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap;font-size:12.5px}
+td.asg{color:var(--muted);white-space:nowrap;font-size:12.5px}
+td.chk{width:34px;text-align:center}
+td.chk input{width:16px;height:16px}
+.note{font-size:12px;color:var(--faint);font-style:italic}
+.flag{background:var(--warn-bg);border:1px solid color-mix(in srgb,var(--warn) 40%,transparent);border-radius:var(--radius);padding:14px 16px;margin-top:26px;font-size:13.5px;line-height:1.6}
+.flag b{color:var(--warn)}
+footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--faint)}
+@media print{ .flag{display:block} body{background:#fff} .card{box-shadow:none} }
+</style>
+<div class="wrap">
+  <p class="eyebrow">AER Worldwide &middot; Operations &middot; Document Control</p>
+  <h1>EHS Intake Checklist</h1>
+  <p class="sub">Procedures that are drafted and currently submitted to Andrew &amp; Paola for review &mdash; these are the ones headed to QCBD next. Pulled live from the Detailed Tracker sheet on July 22, 2026.</p>
+  <div class="rule"></div>
+
+  <h2 class="section"><span class="badge revise">Revise</span> Content revision &mdash; 18 procedures</h2>
+  <div class="card"><div class="tblwrap"><table>
+    <thead><tr><th class="chk"></th><th>Doc No.</th><th>Procedure</th><th>Assigned To</th><th>Due</th></tr></thead>
+    <tbody>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-130</td><td>Lockout Tagout Procedure</td><td class="asg">Robert</td><td class="due">2026-07-24</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-131</td><td>AER Security Control Procedure (TX/SC)</td><td class="asg">Roberto</td><td class="due">2026-07-24</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-134</td><td>Servicing Air Filters Procedure</td><td class="asg">Catherine, Elizabeth</td><td class="due">2026-07-24</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-137</td><td>Forklift Procedure</td><td class="asg">Robert</td><td class="due">2026-07-24</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-138</td><td>Weigh Master Procedure</td><td class="asg">Robert</td><td class="due">2026-07-24</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-139</td><td>Material Stacking and Wrapping / Unwrapping Procedure</td><td class="asg">Trevor</td><td class="due">2026-07-24</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-200</td><td>Receiving Procedure</td><td class="asg">Roberto</td><td class="due">2026-07-29</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-201</td><td>Sorting Procedure</td><td class="asg">Roberto</td><td class="due">2026-07-29</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-203</td><td>Shredder Procedure</td><td class="asg">Roberto</td><td class="due">2026-07-29</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-204</td><td>Hammer Mill Procedure</td><td class="asg">Robert</td><td class="due">2026-07-29</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-209</td><td>Air Compressor Procedure</td><td class="asg">Catherine, Elizabeth</td><td class="due">2026-07-24</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-210</td><td>Scale Procedure</td><td class="asg">Roberto, Robert</td><td class="due">2026-07-29</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-228</td><td>Data Capture Procedure</td><td class="asg">Catherine</td><td class="due">2026-07-24</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">TE-304</td><td>Shipping Procedure</td><td class="asg">Trevor</td><td class="due">2026-07-29</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">TE-406</td><td>Data Sanitization Plan</td><td class="asg">Robert</td><td class="due">2026-07-24</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">TE-407</td><td>R2 Reuse Plan</td><td class="asg">Andrew, Paola</td><td class="due">2026-07-24</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">TE-408</td><td>Asset Recovery Program Procedure</td><td class="asg">Roberto</td><td class="due">2026-07-24</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">TE-409</td><td>Inventory Control Procedure</td><td class="asg">Robert</td><td class="due">2026-07-29</td></tr>
+    </tbody>
+  </table></div></div>
+
+  <h2 class="section"><span class="badge obs">Obsolete</span> Obsolescence approval &mdash; 3 procedures</h2>
+  <div class="card"><div class="tblwrap"><table>
+    <thead><tr><th class="chk"></th><th>Doc No.</th><th>Procedure</th><th>Assigned To</th><th>Due</th><th>Reason</th></tr></thead>
+    <tbody>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-211</td><td>Air Gun Procedure</td><td class="asg">Catherine, Elizabeth</td><td class="due">2026-07-24</td><td class="note">No air guns in use.</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">REC-213</td><td>Dish Downstream Procedure</td><td class="asg">Catherine, Elizabeth</td><td class="due">2026-07-24</td><td class="note">Dish gone.</td></tr>
+      <tr><td class="chk"><input type="checkbox"></td><td class="num">TE-322</td><td>9999 Material Transfer Button Procedure</td><td class="asg">Catherine, Elizabeth</td><td class="due">2026-07-24</td><td class="note">FM Legacy stuff.</td></tr>
+    </tbody>
+  </table></div></div>
+
+  <div class="flag">
+    <b>Worth confirming:</b> REC-205 (Baler Procedure) shows a Last Updated stamp of 2026-07-22 but its Status is still "Assigned," not "Andrew Paola Review" &mdash; the rest of that day's batch moved forward together, so this one may just need its status flipped to match.
+  </div>
+
+  <footer>Pulled from the live Detailed Tracker sheet &middot; 21 of 45 procedures currently submitted for review</footer>
+</div>
